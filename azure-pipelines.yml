@@ -1,0 +1,51 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+#trigger:
+#- main
+
+pool:
+  vmImage: ubuntu-latest
+
+
+stages: 
+- stage: TerraformInit
+  jobs:
+  - job: TF_PLAN
+    continueOnError: false
+    steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+    
+    - task: TerraformTaskV3@3
+      displayName: 'Terraform : init'
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: './terraform'
+        backendServiceArm: 'Kamm-pipeline-Devops'
+        backendAzureRmResourceGroupName: 'rg-kamm-terraform'
+        backendAzureRmStorageAccountName: 'kammstoacct'
+        backendAzureRmContainerName: 'terraformcont'
+        backendAzureRmKey: 'kaam.tfstate'
+    
+    - task: TerraformTaskV3@3
+      displayName: $(System.DefaultWorkingDirectory)
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        workingDirectory: './terraform'
+        environmentServiceNameAzureRM: 'Kamm-pipeline-Devops'
+    
+    - task: TerraformTaskV3@3
+      displayName: 'Terraform : init'
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        workingDirectory: './terraform'
+        environmentServiceNameAzureRM: 'Kamm-pipeline-Devops'
+    
+
