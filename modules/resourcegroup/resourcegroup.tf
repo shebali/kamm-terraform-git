@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_resource_group" "rg2" {
-  name     = "rg-${var.project_variables.project}-${var.project_variables.environment}-test3"
+  name     = "rg-${var.project_variables.project}-${var.project_variables.environment}-test4"
   location = var.project_variables.location
   tags     = var.project_variables.tags
 }
