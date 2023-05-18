@@ -25,7 +25,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: './terraform'
+       # workingDirectory: './terraform'
         backendServiceArm: 'Kamm-pipeline-Devops'
         backendAzureRmResourceGroupName: 'rg-kamm-terraform'
         backendAzureRmStorageAccountName: 'kammstoacct'
@@ -37,7 +37,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'plan'
-        workingDirectory: './terraform'
+      #  workingDirectory: './terraform'
         environmentServiceNameAzureRM: 'Kamm-pipeline-Devops'
     
     - task: TerraformTaskV3@3
@@ -45,7 +45,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'apply'
-        workingDirectory: './terraform'
+       # workingDirectory: './terraform'
         environmentServiceNameAzureRM: 'Kamm-pipeline-Devops'
     
 
