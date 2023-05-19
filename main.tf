@@ -15,13 +15,13 @@
 } 
 */
 
-module "mssqldatabase" {
+/*module "mssqldatabase" {
   source            = "./modules/mssqldatabase"
   project_variables = var.project_variables
   az_sqlserver = var.az_sqlserver
   az_sqldatabase = var.az_sqldatabase
 } 
-
+*/
 
 /*
 module "virtual_network" {
